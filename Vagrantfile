@@ -23,6 +23,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Uncomment to force arm64 for testing images on Intel
     # docker.create_args = ["--platform=linux/arm64"]
   end
+   
 
   # this is a form of configuration not seen earlier in our use of
   # Vagrant: it defines a particular named VM, which is necessary when
@@ -56,6 +57,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # from this host to the VM through the shared folder mounted in
     # the VM at /vagrant
     webserver.vm.provision "shell", path: "build-webserver-vm.sh"
+  end
+
+
+
+  config.vm.define "dbserver" do |dbserver|
+    dbserver.vm.hostname = "dbserver"
+    # Note that the IP address is different from that of the webserver
+    # above: it is important that no two VMs attempt to use the same
+    # IP address on the private_network.
+    dbserver.vm.network "private_network", ip: "192.168.56.12"
+    dbserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
+    
+    dbserver.vm.provision "shell", path: "build-dbserver-vm.sh"
   end
 
 end
