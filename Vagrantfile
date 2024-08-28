@@ -23,7 +23,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Uncomment to force arm64 for testing images on Intel
     # docker.create_args = ["--platform=linux/arm64"]
   end
-   
+
+  # config.vm.provision :shell, :inline => <<-EOT
+  #     sudo echo 'LC_ALL="en_US.UTF-8"' >> /etc/default/locale
+  #     # allow services to run
+  #     sudo echo exit 0 > /usr/sbin/policy-rc.d
+  #     sudo chmod +x /usr/sbin/policy-rc.d
+  #     sudo apt-get update
+  #     sudo apt-get install -y ruby
+  #     # install some commands already in Vagrant box
+  #     sudo apt-get install -y less nano
+  #     sudo apt install lsof
+  #     sudo apt install tcpdump
+  #   EOT
+
 
   # this is a form of configuration not seen earlier in our use of
   # Vagrant: it defines a particular named VM, which is necessary when
@@ -46,7 +59,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # too. There are restrictions on what IP addresses will work, but
     # a form such as 192.168.2.x for x being 11, 12 and 13 (three VMs)
     # is likely to work.
-    webserver.vm.network "private_network", ip: "192.168.56.11"
+    webserver.vm.network "private_network", ip: "192.168.2.11"
 
     # This following line is only necessary in the CS Labs... but that
     # may well be where markers mark your assignment.
@@ -66,7 +79,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Note that the IP address is different from that of the webserver
     # above: it is important that no two VMs attempt to use the same
     # IP address on the private_network.
-    dbserver.vm.network "private_network", ip: "192.168.56.12"
+    dbserver.vm.network "private_network", ip: "192.168.2.12"
     dbserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
     
     dbserver.vm.provision "shell", path: "build-dbserver-vm.sh"
