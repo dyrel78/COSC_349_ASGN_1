@@ -8,3 +8,14 @@ vagrant up
 
 mysql -u root -p
 password --> password
+
+
+## Changing Source
+
+vagrant provision <server_name> --provision-with restart
+
+vagrant provision webserver --provision-with restart
+
+
+### Dummy Data
+Shamelessly sourced from ChatGPT
