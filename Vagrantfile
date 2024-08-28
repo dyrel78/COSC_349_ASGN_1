@@ -5,10 +5,24 @@
 # connected together using an internal network with manually-assigned
 # IP addresses for the VMs.
 
-Vagrant.configure("2") do |config|
-  # (We have used this box previously, so reusing it here should save a
-  # bit of time by using a cached copy.)
+VAGRANTFILE_API_VERSION = "2"
+
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/focal64"
+  config.vm.provider :docker do |docker, override|
+    override.vm.box = nil
+    #docker.image = "ubuntu:focal"
+    docker.image = "dme26/vagrant-provider:ubuntu-focal"
+    docker.remains_running = true
+    docker.has_ssh = true
+    docker.privileged = true
+    docker.volumes = ["/sys/fs/cgroup:/sys/fs/cgroup:rw"]
+    docker.create_args = ["--cgroupns=host","-h ubuntu-focal.testdomain"]
+    # docker.name = "ubuntu-focal"
+    # Uncomment to force arm64 for testing images on Intel
+    # docker.create_args = ["--platform=linux/arm64"]
+  end
 
   # this is a form of configuration not seen earlier in our use of
   # Vagrant: it defines a particular named VM, which is necessary when
@@ -42,19 +56,6 @@ Vagrant.configure("2") do |config|
     # from this host to the VM through the shared folder mounted in
     # the VM at /vagrant
     webserver.vm.provision "shell", path: "build-webserver-vm.sh"
-  end
-
-  # Here is the section for defining the database server, which I have
-  # named "dbserver".
-  config.vm.define "dbserver" do |dbserver|
-    dbserver.vm.hostname = "dbserver"
-    # Note that the IP address is different from that of the webserver
-    # above: it is important that no two VMs attempt to use the same
-    # IP address on the private_network.
-    dbserver.vm.network "private_network", ip: "192.168.56.12"
-    dbserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
-    
-    dbserver.vm.provision "shell", path: "build-dbserver-vm.sh"
   end
 
 end
