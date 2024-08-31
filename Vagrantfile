@@ -63,7 +63,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # This following line is only necessary in the CS Labs... but that
     # may well be where markers mark your assignment.
-    webserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
+    # MIGHT CHANGE THIS TO /vagrant/www
+    webserver.vm.synced_folder "./www/voter", "/vagrant/www/voter", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
 
     # Now we have a section specifying the shell commands to provision
     # the webserver VM. Note that the file test-website.conf is copied
@@ -71,7 +72,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # the VM at /vagrant
     webserver.vm.provision "shell", path: "build-webserver-vm.sh"
   end
-
 
 
   config.vm.define "dbserver" do |dbserver|
@@ -84,6 +84,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     
     dbserver.vm.provision "shell", path: "build-dbserver-vm.sh"
   end
+
+
+  config.vm.define "adminserver" do |adminserver|
+    adminserver.vm.hostname = "adminserver"
+    adminserver.vm.network "forwarded_port", guest: 80, host: 8081, host_ip: "127.0.0.1"
+    adminserver.vm.network "private_network", ip: "192.168.2.13"
+    adminserver.vm.synced_folder "./www/admin", "/vagrant/www/admin", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
+    adminserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
+
+    adminserver.vm.provision "shell", path: "build-adminserver-vm.sh"
+  end
+
+  
 
 
   config.vm.provision :shell, :inline => <<-EOT
