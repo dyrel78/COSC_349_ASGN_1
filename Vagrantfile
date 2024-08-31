@@ -85,6 +85,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     dbserver.vm.provision "shell", path: "build-dbserver-vm.sh"
   end
 
+
+  config.vm.provision :shell, :inline => <<-EOT
+     echo 'LC_ALL="en_US.UTF-8"' >> /etc/default/locale
+     # allow services to run
+     echo exit 0 > /usr/sbin/policy-rc.d
+     chmod +x /usr/sbin/policy-rc.d
+     apt-get update
+     apt-get install -y ruby
+     # install some commands already in Vagrant box
+     apt-get install -y less nano
+  EOT
+
+
 end
 
 #  LocalWords:  webserver xenial64
