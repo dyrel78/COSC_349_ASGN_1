@@ -1,8 +1,84 @@
 
 <?php
-     session_start();
+     
+        // session_start();
+        // if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+        //     header('Location: create-account.php');
+        //     exit;
+        // }
 
-?>
+        session_start(); 
+        // Database connection parameters
+$db_host = '192.168.2.12';
+$db_name = 'drinksDB';
+$db_user = 'webuser';
+$db_passwd = 'password';
+
+$pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
+
+// try {
+    // Connect to the database
+    $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Check if the form has been submitted
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Retrieve username and password from form
+        $username = trim($_POST['username']);
+        $password = trim($_POST['password']);
+        $email = trim($_POST['email']);
+        $age = trim($_POST['age']);
+        $gender = trim($_POST['gender']);
+
+        // Check if username already exists
+        if (empty($username) || empty($password) || empty($email) || empty($age) || empty($gender)) {
+            $message = 'All fields are required.';
+            $error = true;
+        } elseif (strlen($username) < 3 || strlen($password) < 5) {
+            $message = 'Username must be at least 3 characters and password at least 5 characters.';
+            $error = true;
+        }else{
+            $stmt = $pdo->prepare("SELECT * FROM Users WHERE username = :username");
+            $stmt->bindParam(':username', $username);
+            $stmt->execute();
+            $existing_user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($existing_user) {
+                // If username is taken, show an error message
+                $message = 'Username already exists. Please choose a different one.';
+                $error = true;
+            } else {
+                // Hash the password before storing
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+                // Insert new user into the database
+                $stmt = $pdo->prepare("INSERT INTO Users (username, user_password, email, age, gender) VALUES (:username, :password, :email, :age, :gender)");
+                $stmt->bindParam(':username', $username);
+                $stmt->bindParam(':password', $hashed_password);
+                $stmt->bindParam(':email', $email);
+                $stmt->bindParam(':age', $age, PDO::PARAM_INT);
+                $stmt->bindParam(':gender', $gender);
+
+                if ($stmt->execute()) {
+                    // Display success message
+                    $message = 'Account created successfully! You can now <a href="login.php">login</a>.';
+                } else {
+                    // Display error message
+                    $message = 'An error occurred while creating your account. Please try again.';
+                    $error = true;
+                }
+        }
+      
+
+
+    }
+        
+    }
+// } catch (PDOException $e) {
+//     $message = "Database error: " . htmlspecialchars($e->getMessage());
+//     $error = true;
+// }
+        ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,81 +133,8 @@
         if (isset($message)) {
             echo "<p class='" . (isset($error) ? 'error-message' : 'success-message') . "'>" . htmlspecialchars($message) . "</p>";
         }
-
-        session_start();
-        // if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-        //     header('Location: create-account.php');
-        //     exit;
-        // }
-
-
-        // Database connection parameters
-$db_host = '192.168.2.12';
-$db_name = 'drinksDB';
-$db_user = 'webuser';
-$db_passwd = 'password';
-
-$pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-
-try {
-    // Connect to the database
-    $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // Check if the form has been submitted
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Retrieve username and password from form
-        $username = trim($_POST['username']);
-        $password = trim($_POST['password']);
-
-        // Check if username already exists
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
-        $stmt->bindParam(':username', $username);
-        $stmt->execute();
-        $existing_user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($existing_user) {
-            // If username is taken, show an error message
-            $message = 'Username already exists. Please choose a different one.';
-            $error = true;
-        } else {
-            // Hash the password before storing
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-            // Insert new user into the database
-            $stmt = $pdo->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
-            $stmt->bindParam(':username', $username);
-            $stmt->bindParam(':password', $hashed_password);
-
-            if ($stmt->execute()) {
-                // Display success message
-                $message = 'Account created successfully! You can now <a href="login.php">login</a>.';
-            } else {
-                // Display error message
-                $message = 'An error occurred while creating your account. Please try again.';
-                $error = true;
-            }
-        }
-        // Example of basic validation
-            if (empty($username) || empty($password)) {
-                $message = 'Username and password are required.';
-                $error = true;
-            } elseif (strlen($username) < 3 || strlen($password) < 5) {
-                $message = 'Username must be at least 3 characters and password at least 5 characters.';
-                $error = true;
-            } else {
-                // Proceed with checking username existence and inserting the user
-            }
-
-
-
-        
-    }
-} catch (PDOException $e) {
-    $message = "Database error: " . htmlspecialchars($e->getMessage());
-    $error = true;
-}
         ?>
     </div>
+   
 </body>
 </html>
