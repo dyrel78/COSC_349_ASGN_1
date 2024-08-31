@@ -30,13 +30,21 @@ vagrant provision webserver --provision-with restart
 vagrant provision adminserver --provision-with restart
 
 
-## restartgin db sql
+## restarting db vm when modiiying the SQL directly
 
 vagrant up
 vagrant ssh dbserver
 cd /vagrant
-echo export PS1='\[\033[0;32m\]: \w\$;\[\033[0m\] '
-sudo restart_db-server.sh
+
+#!/bin/bash
+export PS1='\[\033[0;32m\]: \w\$;\[\033[0m\] '
+
+OR (sudo sh build-vars.sh)
+
+sudo sh restart-db-server.sh
+
+
+
 
 ### Dummy Data
 Shamelessly sourced from ChatGPT
