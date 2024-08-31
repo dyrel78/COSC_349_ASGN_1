@@ -49,19 +49,22 @@ $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
                 $error = true;
             } else {
                 // Hash the password before storing
-                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+                // $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
                 // Insert new user into the database
                 $stmt = $pdo->prepare("INSERT INTO Users (username, user_password, email, age, gender) VALUES (:username, :password, :email, :age, :gender)");
                 $stmt->bindParam(':username', $username);
-                $stmt->bindParam(':password', $hashed_password);
+                // $stmt->bindParam(':password', $hashed_password);
+                $stmt->bindParam(':password', $password);
                 $stmt->bindParam(':email', $email);
                 $stmt->bindParam(':age', $age, PDO::PARAM_INT);
                 $stmt->bindParam(':gender', $gender);
 
                 if ($stmt->execute()) {
                     // Display success message
-                    $message = 'Account created successfully! You can now <a href="login.php">login</a>.';
+                    $message = 'Account created successfully! You can now login.';
+                    // $message = 'Account created successfully! You can now <a href="login.php">login</a>.';
+
                 } else {
                     // Display error message
                     $message = 'An error occurred while creating your account. Please try again.';
