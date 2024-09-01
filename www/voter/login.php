@@ -43,7 +43,7 @@
                     $_SESSION['username'] = $username;
 
                     // Redirect to the home page or dashboard
-                    header('Location: home-page.php');
+                    header('Location: index.php');
                     exit;
 
                 } else {

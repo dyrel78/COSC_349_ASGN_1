@@ -1,29 +1,62 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <html>
 <head><title>Webserver test page</title>
-<style>
-th { text-align: left; }
 
-table, th, td {
-  border: 2px solid grey;
-  border-collapse: collapse;
-}
-
-th, td {
-  padding: 0.2em;
-}
-</style>
 </head>
 
 <body>
-<h1>Webserver test page.</h1>
+<h1> Drink of the Week Home Page</h1>
+<?php
+                error_reporting(E_ALL);
+                ini_set('display_errors', 1);
+                $db_host   = '192.168.2.12';
+                $db_name   = 'drinksDB';
+                $db_user   = 'webuser';
+                $db_passwd = 'password';
 
-<p>This page demonstrates that the webserver on your VM is generating content.</p>
+                $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
 
-<p>You likely now want to <a href="test-database.php">proceed to your webserver's
-database connection testing page</a>. However, note that if there is a network problem reaching the database, the database connection testing page will spend a minute or so waiting before it produces any content.</p>
+                session_start();
 
-<p>For your assignment work, your project should begin on this page. The only reason the database testing page was not placed within <kbd>index.php</kbd> was to assist you in debugging any network problems you might be having.</p>
+                try{
+                        $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
+                        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    //check if user is logged in
+                    if (isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] == true) {
+                        echo "<ul>";
+                        echo "<li><a href='index.php'>Home</a></li>";
+                        echo "<li><a href='logout.php'>Logout</a></li>";
+                        echo "<li><a href='voting-page.php'>Contact</a></li>";
+                        echo "</ul>";
+                        // echo "<h1> Drink of the Week Home Page</h1>";
+                        // echo "<p> Welcome to the Drink of the Week Home Page. Here you can view the current drink of the week, and vote for the next drink of the week. </p>";
+                        echo "<p> You are currently logged in. </p>";
+                        // echo "<p> <a href='logout.php'>Logout</a> </p>";
+                        echo "<p> <a href='voting-page.php'>Vote for the next drink of the week</a> </p>";
+                       } else {
+                        echo "<ul>";
+                        echo "<li><a href='index.php'>Home</a></li>";
+                        echo "<li><a href='login.php'>News</a></li>";
+                        echo "<li><a href='voting-page.php'>Contact</a></li>";
+                        echo "</ul>";
+                        // echo "<h1> Drink of the Week Home Page</h1>";
+                        // echo "<p> Welcome to the Drink of the Week Home Page. Here you can view the current drink of the week, and vote for the next drink of the week. </p>";
+                        echo "<p>You are currently logged out. <a href='login.php'>Login</a></p>";
+                        // echo "<p> <a href='login.php'>Login</a> </p>";
+                        // echo "<p> <a href='voting-page.php'>Vote for the next drink of the week</a> </p>";
+                       }
+
+                        
+                } catch(PDOException $e){
+                        echo "Database error: " . htmlspecialchars($e->getMessage());
+                }
+
+
+
+
+        ?>    
+
+<p> Welcome to the Drink of the Week Home Page. Here you can view the current drink of the week, and vote for the next drink of the week. </p>
 
 </body>
 </html>
