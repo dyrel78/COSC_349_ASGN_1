@@ -69,3 +69,10 @@ body {
 .success-message {
     color: green;
 }
+
+/*   
+  .card-header {
+    display: flex;
+    justify-content: flex-end;
+  } */
+

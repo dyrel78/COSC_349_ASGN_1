@@ -61,8 +61,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+<?php include 'css/style.css'; ?>
+</style>
     <title>Login Page</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="/css/style.css"> -->
 
 </head>
 <body>

@@ -85,11 +85,11 @@ $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <title>Create Account</title>
     <style>
-       
-    </style>
+<?php include 'css/style.css'; ?>
+</style>
 </head>
 <body>
 
