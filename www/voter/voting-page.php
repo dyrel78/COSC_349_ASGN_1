@@ -39,6 +39,21 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
             /* Navbar.css */
 
+        .footer {
+            position: fixed;
+            width: 100%;
+
+        }
+        .footer >p {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-right: 50px;
+
+            }
+
+            
+
 
     </style>
 
@@ -76,20 +91,36 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             $q = $pdo->query("SELECT * FROM Drinks");
 
             while ($row = $q->fetch()) {
+
                 echo "<div class='card-item'>";
                 echo "<h3>" . htmlspecialchars($row["name_of_drink"]) . "</h3>";
                 echo "<p>" . htmlspecialchars($row["descripton"]) . "</p>";
                 echo "<p>Price: $" . htmlspecialchars($row["price"]) . "</p>";
                 // echo "<p>Rating: " . htmlspecialchars($row["rating"]) . "</p>";
                 // echo "<p>Likes: " . htmlspecialchars($row["likes"]) . "</p>";
-                echo "<button>Vote</button>";
+                // echo "<button>Vote</button>";
+                echo "<form action='choose-voted-drink.php' method='post'>";
+                echo "<input type='hidden' name='drink_id' value='" . htmlspecialchars($row["id"]) . "'>";
+                echo "<input class='submit-button' type='submit' value='Vote'>";
+                echo "</form>";
                 echo "</div>";
+
+    
+                
+
+                
             }
             ?>
 
 
         </div>
 
+        <div class="footer"> 
+            <p> &copy; 2024 Drink of the Week </p>
+            <p> Made by Dyrel Lumiwes </p>
+            
+
+        </div>
 
     </div>
 
