@@ -63,6 +63,14 @@
 <head>
 <style>
 <?php include 'css/style.css'; ?>
+@font-face {
+    font-family: "montserrat";
+    src: url(Montserrat-Regular.woff2);
+    
+        }
+    body{
+        font-family: 'montserrat', sans-serif;
+    }
 </style>
     <title>Login Page</title>
     <!-- <link rel="stylesheet" href="/css/style.css"> -->

@@ -1,14 +1,15 @@
 
 @font-face {
     font-family: "montserrat";
-    src: url(Montserrat-Regular.woff2);
+    src:format(url(Montserrat-Regular.woff2) format('woff2'));
+    /* src: url(Montserrat-Regular.woff2); */
+    /* src:local('Montserrat-Regular'), url(Montserrat-Regular.woff2) format('woff2'); */
 }
 
 body {
-    /* font-family: Arial, sans-serif; */
     font-family: "montserrat";
     /* background-color: #f4f4f4; */
-    background-color:goldenrod;
+    background-color:beige;
     margin: 0;
     padding: 0;
      display: flex;
@@ -20,20 +21,17 @@ body {
 }
 
 
-.card-container {
-    width: 100%; /* Adjust this width to fit your design */
-  }
+/* .card-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    
+  } */
   
  
   
-  .card-grid {
-    display: flex;
-    flex-wrap: wrap; /* Allows cards to wrap onto the next line */
-    flex-direction: row; /* Aligns the cards in a row */
-    gap: 20px; /* Space between the cards */
-    justify-content: center; 
-
-  }
+ 
   
   .card-item {
     display: flex;
@@ -45,7 +43,38 @@ body {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     width: 50%;
+    align-items: center;
+    align-content: center;
     box-sizing: border-box;
+    margin: 10px;
+    
+  }
+
+  .card-item:hover {
+    background-color: #f4f4f4;
+  }
+
+  .card-item h3{
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .card-item button{
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+    width: 80%;
+    align-self: center;
+  }
+
+  .card-item button:hover{
+    background-color: #adb0b3;
   }
 
 
