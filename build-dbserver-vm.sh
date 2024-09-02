@@ -20,22 +20,54 @@ echo "mysql-server mysql-server/root_password password $MYSQL_PWD" | debconf-set
 echo "mysql-server mysql-server/root_password_again password $MYSQL_PWD" | debconf-set-selections
 
 # Install the MySQL database server.
+# apt-get -y install lsof
 apt-get -y install mysql-server
 # On normal VMs MySQL server will now be running, but starting
 # the service explicitly even if it's started causes no warnings.
 # (... and it _is_ necessary for some Docker testing I'm doing)
 service mysql start
 
-# Run some setup commands to get the database ready to use.
+# ## MY ADDITION
+# echo "SET GLOBAL log_bin_trust_function_creators = 1;" | mysql 
+
+
+# # Run some setup commands to get the database ready to use.
+# # First create a database.
+# echo "CREATE DATABASE drinksDB;" | mysql
+
+# # Then create a database user "webuser" with the given password.
+# echo "CREATE USER 'webuser'@'%' IDENTIFIED BY 'password';" | mysql
+
+# # NEW ADDItion
+# # echo "GRANT ALL PRIVILEGES ON drinksDB.* TO 'webuser'@'%';" | mysql
+# echo "GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'webuser'@'%';" | mysql
+
+# echo "GRANT SUPER ON *.* TO 'websuser'@'%'" | mysql;
+# # Grant all permissions to the database user "webuser" regarding
+# # the "fvision" database that we just created, above.
+# echo "GRANT ALL PRIVILEGES ON drinksDB.* TO 'webuser'@'%'" | mysql
+
+# # Reload privileges to make sure they take effect
+# echo "FLUSH PRIVILEGES;" | mysql
+
+## A
+
+# Set global variable which allows functions to be created ( SOLVES THE TRIGGER PROBLEM)
+mysql -u root -e "SET GLOBAL log_bin_trust_function_creators = 1;"
+
 # First create a database.
-echo "CREATE DATABASE drinksDB;" | mysql
+mysql -u root -e "CREATE DATABASE drinksDB;"
 
-# Then create a database user "webuser" with the given password.
-echo "CREATE USER 'webuser'@'%' IDENTIFIED BY 'password';" | mysql
+# Create user (without GRANT)
+mysql -u root -e "CREATE USER 'webuser'@'%' IDENTIFIED BY 'password';"
 
-# Grant all permissions to the database user "webuser" regarding
-# the "fvision" database that we just created, above.
-echo "GRANT ALL PRIVILEGES ON drinksDB.* TO 'webuser'@'%'" | mysql
+# Grant privileges separately
+mysql -u root -e "GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'webuser'@'%';"
+mysql -u root -e "GRANT SUPER ON *.* TO 'webuser'@'%';"
+mysql -u root -e "GRANT ALL PRIVILEGES ON drinksDB.* TO 'webuser'@'%';"
+
+# Flush privileges
+mysql -u root -e "FLUSH PRIVILEGES;"
 
 # Set the MYSQL_PWD shell variable that the mysql command will
 # try to use as the database password ...
