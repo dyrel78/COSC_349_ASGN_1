@@ -138,6 +138,10 @@ $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
         }
         ?>
     </div>
+        <div class="footer"> 
+            <p> &copy; 2024 Drink of the Week </p>
+            <p> Made by Dyrel Lumiwes </p>
+        </div>
    
 </body>
 </html>

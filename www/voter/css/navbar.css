@@ -11,8 +11,9 @@
   }
 
 .footer {
-
+    position: absolute;
     bottom: 0;
+    width: 95.15%;
     /* width: 100%; */
   }
 .footer >p {

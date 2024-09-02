@@ -62,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Set session variable to track login status
         $_SESSION['logged_in'] = true;
         $_SESSION['username'] = $username;
+        $_SESSION['user_id'] = $existing_user['id'];
 
         // Redirect to the home page or dashboard
         header('Location: index.php');
@@ -107,7 +108,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         
 
-            </div>
+        <div class="footer"> 
+            <p> &copy; 2024 Drink of the Week </p>
+            <p> Made by Dyrel Lumiwes </p>
+            
+
+        </div>
+    </div>
 
 
 </body>
