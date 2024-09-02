@@ -17,14 +17,14 @@
 </head>
 
 <body>
-    <h1>Database Test Page</h1>
+    <h1>Database Test Page TESTING</h1>
 
     <p>Showing contents of Drinks table:</p>
 
     <table border="1">
         <tr>
             <th>Name of Drink</th>
-            <th>Likes</th>
+            <th>Likes TESTING</th>
         </tr>
 
         <?php
@@ -64,6 +64,7 @@
 
             if ($stmt->rowCount() > 0) {
                 echo "<h2>Drinks to Consider Removing or Improving:</h2>";
+                echo "<h3>Drinks with a rating below $threshold:</h3>";
                 echo "<table border='1'><tr><th>Name of Drink</th><th>Rating</th></tr>";
                 while ($row = $stmt->fetch()) {
                     echo "<tr>";
