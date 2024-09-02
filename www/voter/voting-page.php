@@ -52,6 +52,9 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
             }
 
+        #selected-drink {
+            background-color: lightgreen;
+        }
             
 
 
@@ -89,28 +92,50 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             $q = $pdo->query("SELECT * FROM Drinks");
+            $userId = $_SESSION['user_id'];
+
+            $chosenDrinkStmt = $pdo->prepare("SELECT * FROM UserLikes WHERE user_id = :userId");
+            $chosenDrinkStmt->bindParam(':userId', $userId);
+            $chosenDrinkStmt->execute();
+            $drink = $chosenDrinkStmt->fetch(PDO::FETCH_ASSOC);
+
+
 
             while ($row = $q->fetch()) {
 
-                echo "<div class='card-item'>";
-                echo "<h3>" . htmlspecialchars($row["name_of_drink"]) . "</h3>";
-                echo "<p>" . htmlspecialchars($row["descripton"]) . "</p>";
-                echo "<p>Price: $" . htmlspecialchars($row["price"]) . "</p>";
-                // echo "<p>Rating: " . htmlspecialchars($row["rating"]) . "</p>";
-                // echo "<p>Likes: " . htmlspecialchars($row["likes"]) . "</p>";
-                // echo "<button>Vote</button>";
-                echo "<form action='choose-voted-drink.php' method='post'>";
-                echo "<input type='hidden' name='drink_id' value='" . htmlspecialchars($row["id"]) . "'>";
-                echo "<input class='submit-button' type='submit' value='Vote'>";
-                echo "</form>";
-                echo "</div>";
+             
+                    if ($drink['drink_id'] == $row['id']) {
+                        echo "<div class='card-item'id='selected-drink'>";
+                        echo "<h3>" . htmlspecialchars($row["name_of_drink"]) . "</h3>";
+                        echo "<p>" . htmlspecialchars($row["descripton"]) . "</p>";
+                        echo "<p>Price: $" . htmlspecialchars($row["price"]) . "</p>";
+                        echo "<p>You have already voted for this drink</p>";
+                        echo "</div>";
+                    } else {
+                    echo "<div class='card-item'>";
+                    echo "<h3>" . htmlspecialchars($row["name_of_drink"]) . "</h3>";
+                    echo "<p>" . htmlspecialchars($row["descripton"]) . "</p>";
+                    echo "<p>Price: $" . htmlspecialchars($row["price"]) . "</p>";
+                    // echo "<p>Rating: " . htmlspecialchars($row["rating"]) . "</p>";
+                    // echo "<p>Likes: " . htmlspecialchars($row["likes"]) . "</p>";
+                    // echo "<button>Vote</button>";
+                    echo "<form action='choose-voted-drink.php' method='post'>";
+                    echo "<input type='hidden' name='drink_id' value='" . htmlspecialchars($row["id"]) . "'>";
+                    echo "<input class='submit-button' type='submit' value='Vote'>";
+                    echo "</form>";
+                    echo "</div>";
 
-    
+                
+
+          
+                    }
                 
 
                 
             }
             ?>
+
+            
 
 
         </div>
