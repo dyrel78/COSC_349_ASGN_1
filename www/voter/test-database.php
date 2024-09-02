@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <h1>Database test page</h1>
+    <h1>Database test page testing </h1>
 
     <p>Showing contents of Drinks table:</p>
 
@@ -60,6 +60,23 @@
 
                 echo "</tr>\n";
             }
+
+            $a = $pdo->query("SELECT * FROM Users");
+
+            while ($row = $a->fetch()) {
+                echo "<tr>";
+                echo "<td>" . htmlspecialchars($row["id"]) . "</td>";
+                echo "<td>" . htmlspecialchars($row["username"]) . "</td>";
+                echo "<td>" . htmlspecialchars($row["password"]) . "</td>";
+                echo "<td>" . htmlspecialchars($row["email"]) . "</td>";
+                echo "<td>" . htmlspecialchars($row["role"]) . "</td>";
+
+                echo "</tr>\n";
+            }
+
+
+
+
         } catch (PDOException $e) {
             echo "Database error: " . htmlspecialchars($e->getMessage());
         }
