@@ -1,13 +1,12 @@
 
 <?php
-     
-        // session_start();
-        // if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-        //     header('Location: create-account.php');
-        //     exit;
-        // }
 
-        session_start(); 
+session_start(); 
+?>
+
+<?php
+     
+
         // Database connection parameters
 $db_host = '192.168.2.12';
 $db_name = 'drinksDB';
@@ -89,6 +88,7 @@ $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
     <title>Create Account</title>
     <style>
 <?php include 'css/style.css'; ?>
+<?php include 'css/navbar.css'; ?>
 </style>
 </head>
 <body>
@@ -106,6 +106,15 @@ $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
     foreign key (liked_drink_id) references Drinks(id)
 ); -->
     <div class="container">
+        <nav class="navbar">
+            <div class="navbar-logo">Drinks App</div>
+            <ul class="navbar-links">
+                <li><a href="index.php">Home</a></li>
+                <li><a href="login.php">Login</a></li>
+            </ul>
+        </nav>
+
+        <div class="text-container">
         <h2>Create Account</h2>
         <form action="create-account.php" method="post">
             <label for="username">Username:</label>
@@ -137,6 +146,9 @@ $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
             echo "<p class='" . (isset($error) ? 'error-message' : 'success-message') . "'>" . htmlspecialchars($message) . "</p>";
         }
         ?>
+        </div>
+
+       
     </div>
         <div class="footer"> 
             <p> &copy; 2024 Drink of the Week </p>
