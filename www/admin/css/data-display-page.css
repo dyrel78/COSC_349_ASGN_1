@@ -1,0 +1,116 @@
+/* Global Font and Body Styles */
+@font-face {
+    font-family: "montserrat";
+    src: url('css/Montserrat-Regular.woff2');
+}
+
+body {
+    font-family: 'montserrat', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    /* padding: 20px; */
+}
+
+/* Headings */
+h1, h2, h3 {
+    color: #444;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+
+/* Links */
+a {
+    color: #0073e6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Tables */
+table {
+    width: 100%;
+
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+
+th {
+    background-color: #0073e6;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Button styles */
+button, input[type="submit"] {
+    background-color: #0073e6;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #005bb5;
+}
+
+/* Container for upload link */
+div {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Form and input styling */
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    table, th, td {
+        display: block;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    th::before, td::before {
+        position: absolute;
+        left: 10px;
+        white-space: nowrap;
+    }
+}
