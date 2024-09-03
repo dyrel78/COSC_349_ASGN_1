@@ -1,6 +1,8 @@
 drop table if exists UserLikes;
+drop table if exists DrinkOfTheWeek;
 drop table if exists Users;
 drop table if exists Drinks;
+
 
 create table Drinks (
     id int primary key auto_increment,
@@ -31,6 +33,13 @@ create table UserLikes (
     foreign key (user_id) references Users(id),
     foreign key (drink_id) references Drinks(id)
 );
+
+create table DrinkOfTheWeek (
+    id int primary key auto_increment,
+    drink_id int,
+    foreign key (drink_id) references Drinks(id)
+);
+
 
 -- Dummy data sources from ChatGPT--
 
@@ -66,6 +75,10 @@ INSERT INTO UserLikes (user_id, drink_id) VALUES
 (7, 1),  -- Sarah Brown likes 
 (8, 1);  -- Mike Brown likes
 ;
+
+INSERT INTO DrinkOfTheWeek (drink_id) VALUES
+(1); -- Whiskey is the drink of the week
+
 
 
 UPDATE Drinks d

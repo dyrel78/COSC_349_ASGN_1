@@ -20,9 +20,51 @@ session_start();
             font-family: 'montserrat', sans-serif;
         }
 
-        .footer{
-
+        .card-item {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            width: 50%;
+            align-items: center;
+            align-content: center;
+            box-sizing: border-box;
+            margin: 10px;
+            
         }
+
+        .card-item:hover {
+            background-color: #f4f4f4;
+        }
+
+        .card-item h3{
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .card-item button{
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+            width: 80%;
+            align-self: center;
+        }
+
+        .card-item button:hover{
+            background-color: #adb0b3;
+        }
+
+
     </style>
 </head>
 
@@ -96,6 +138,25 @@ session_start();
 
 
             ?>
+            <div class="drink-of-the-week-container"> 
+                <h2> Drink of the Week </h2>
+                <!-- <div class="drink-of-the-week"> -->
+                <div class="card-item">
+                    <?php
+                    $q = $pdo->query(
+                    "SELECT * FROM  DrinkOfTheWeek as dotw
+                    INNER JOIN Drinks  as d on dotw.drink_id = d.id
+                    ORDER BY dotw.id DESC LIMIT 1
+                    ");
+                    $row = $q->fetch();
+                    echo "<h3>" . htmlspecialchars($row["name_of_drink"]) . "</h3>";
+                    echo "<p>" . htmlspecialchars($row["descripton"]) . "</p>";
+                    echo "<p> Price : $" . htmlspecialchars($row["price"]) . "</p>";
+
+                    ?>
+                </div>
+
+            </div>
                
          <!-- <img src="assets/drinks.webp" alt="drink" style="width: 60%; height: 60%;  "> -->
        
