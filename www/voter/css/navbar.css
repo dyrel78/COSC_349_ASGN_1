@@ -1,7 +1,9 @@
 /* Navbar.css */
 
 .navbar{
-    background-color: #333;
+    /* background-color: #333; */
+    /* background-color: #fe56b8; */
+    background-color: #ee1317;
     padding: 1rem;
     display: flex;
     justify-content: space-between;
@@ -13,7 +15,9 @@
 .footer {
     position: absolute;
     bottom: 0;
-    background-color: #333;
+    /* background-color: #333; */
+    /* background-color: #fe56b8; */
+    background-color: #ee1317;
     padding: 0.5rem;
     display: flex;
     justify-content: space-between;

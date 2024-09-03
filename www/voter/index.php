@@ -19,7 +19,22 @@ session_start();
         body {
             font-family: 'montserrat', sans-serif;
         }
+        .text-container >h3{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+        } 
 
+        .drink-of-the-week-container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+
+        }
         .card-item {
             display: flex;
             flex-direction: column;
@@ -34,6 +49,8 @@ session_start();
             align-content: center;
             box-sizing: border-box;
             margin: 10px;
+            align-self: center;
+
             
         }
 
@@ -128,8 +145,8 @@ session_start();
 
             <?php
                if (isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] == true) {
-                echo "<p> You are currently logged in. </p>";                       
-                echo "<p> <a href='voting-page.php'>Vote for the next drink of the week</a> </p>";
+                // echo "<p> You are currently logged in. </p>";                       
+                echo "<h3 > <a href='voting-page.php'>Vote for the next drink of the week</a> </h3>";
                }else {
                 echo "<p>You are currently logged out. You can log in at <a href='login.php'>Login</a></p>";
                 echo "<p> You can also create an account at <a href='create-account.php'>Create Account</a></p>";
@@ -139,7 +156,7 @@ session_start();
 
             ?>
             <div class="drink-of-the-week-container"> 
-                <h2> Drink of the Week </h2>
+                <h2> Current Drink of the Week </h2>
                 <!-- <div class="drink-of-the-week"> -->
                 <div class="card-item">
                     <?php

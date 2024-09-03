@@ -83,13 +83,48 @@ try {
 
 <body>
     <div class="container">
-        <div class="navbar">
+        <?php
+    try {
+            $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            //check if user is logged in
+            if (isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] == true) {
+                echo "<nav class='navbar'>";
+                echo "<div class='navbar-logo'>Drinks App</div>";
+                echo "<ul class='navbar-links'>";
+                echo "<li><a href='index.php'>Home</a></li>";
+                echo "<li><a href='logout.php'>Logout</a></li>";
+                echo "</ul>";
+                echo "</nav>";
+                // echo "<p> You are currently logged in. </p>";                       
+                // echo "<p> <a href='voting-page.php'>Vote for the next drink of the week</a> </p>";
+
+            } else {
+                echo "<nav class='navbar'>";
+                echo "<div class='navbar-logo'>Drinks App</div>";
+                echo "<ul class='navbar-links'>";
+                echo "<li><a href='index.php'>Home</a></li>";
+                echo "<li><a href='create-account.php'>Create Account</a></li>";
+                echo "<li><a href='login.php'>Login</a></li>";
+                echo "</ul>";
+                echo "</nav>";
+                // echo "<p>You are currently logged out. <a href='login.php'>Login</a></p>";
+            }
+        } catch (PDOException $e) {
+            echo "Database error: " . htmlspecialchars($e->getMessage());
+            echo "<div class='error-message'>$errorMessage</div>";
+
+
+
+        }
+        ?>
+        <!-- <div class="navbar">
             <div class="navbar-logo">Drinks App</div>
             <ul class="navbar-links">
                 <li><a href="index.php">Home</a></li>
                 <li><a href="login.php">Login</a></li>
             </ul>
-        </div>
+        </div> -->
 
         <div class="login-container">
             <h2>Login</h2>
