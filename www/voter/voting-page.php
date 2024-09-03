@@ -14,6 +14,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     <style>
         <?php include 'css/vote-page.css'; ?>
         <?php include 'css/navbar.css'; ?>
+        
 
         @font-face {
             font-family: "montserrat";
@@ -42,6 +43,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
         .footer {
             position: fixed;
             width: 100%;
+            height: 2.5%;
 
         }
         .footer >p {
@@ -98,18 +100,29 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             $chosenDrinkStmt->bindParam(':userId', $userId);
             $chosenDrinkStmt->execute();
             $drink = $chosenDrinkStmt->fetch(PDO::FETCH_ASSOC);
+            
 
+            
 
 
             while ($row = $q->fetch()) {
 
-             
-                    if ($drink['drink_id'] == $row['id']) {
+                    if ($drink && $drink['drink_id'] == $row['id']) {
                         echo "<div class='card-item'id='selected-drink'>";
                         echo "<h3>" . htmlspecialchars($row["name_of_drink"]) . "</h3>";
                         echo "<p>" . htmlspecialchars($row["descripton"]) . "</p>";
                         echo "<p>Price: $" . htmlspecialchars($row["price"]) . "</p>";
+                        // rating
+                        // echo "<select name='rating'>" . htmlspecialchars($row["rating"])
+                        //     . "<option value='1'>1</option>"
+                        //     . "<option value='2'>2</option>"
+                        //     . "<option value='3'>3</option>"
+                        //     . "<option value='4'>4</option>"
+                        //     . "<option value='5'>5</option>"
+                        //     . "</select>"; 
+
                         echo "<p>You have already voted for this drink</p>";
+
                         echo "</div>";
                     } else {
                     echo "<div class='card-item'>";
@@ -119,6 +132,13 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                     // echo "<p>Rating: " . htmlspecialchars($row["rating"]) . "</p>";
                     // echo "<p>Likes: " . htmlspecialchars($row["likes"]) . "</p>";
                     // echo "<button>Vote</button>";
+                    // echo "<select name='rating'>" . htmlspecialchars($row["rating"])
+                    // . "<option value='1'>1</option>"
+                    // . "<option value='2'>2</option>"
+                    // . "<option value='3'>3</option>"
+                    // . "<option value='4'>4</option>"
+                    // . "<option value='5'>5</option>"
+                    // . "</select>"; 
                     echo "<form action='choose-voted-drink.php' method='post'>";
                     echo "<input type='hidden' name='drink_id' value='" . htmlspecialchars($row["id"]) . "'>";
                     echo "<input class='submit-button' type='submit' value='Vote'>";

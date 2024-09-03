@@ -12,6 +12,13 @@ body {
     /* padding: 20px; */
 }
 
+.container{
+    margin: 0 auto;
+     background-color: #f4f4f9;
+
+
+}
+
 /* Headings */
 h1, h2, h3 {
     color: #444;
@@ -29,6 +36,11 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+.grid-container {
+    display: grid;
+    padding: 10px;
+    justify-content: center;
 }
 
 /* Tables */
@@ -84,7 +96,7 @@ button:hover, input[type="submit"]:hover {
 /* Container for upload link */
 div {
     text-align: center;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 
 /* Form and input styling */

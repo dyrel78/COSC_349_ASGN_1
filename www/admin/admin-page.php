@@ -4,7 +4,9 @@
 <head>
     <title>Database Test Page</title>
     <style>
-        <?php include 'css/style.css'; ?><?php include 'css/navbar.css'; ?><?php include 'css/data-display-page.css'; ?>@font-face {
+        <?php include 'css/style.css'; ?>
+        <?php include 'css/navbar.css'; ?>
+        <?php include 'css/data-display-page.css'; ?>@font-face {
             font-family: "montserrat";
             src: url(css/Montserrat-Regular.woff2);
         }
@@ -33,11 +35,11 @@
             padding-top: 20px;
         }
 
-        .grid-container {
+        /* .grid-container {
             display: grid;
             grid-template-columns: auto auto;
             padding: 10px;
-        }
+        } */
 
 
 
@@ -54,7 +56,7 @@
             display: block;
             color: white;
             text-align: center;
-            padding: 14px 20px;
+            /* padding: 14px 20px; */
             text-decoration: none;
             font-size: 17px;
         }
@@ -90,7 +92,7 @@
         </nav>
         <h1>Database Test Page </h1>
 
-        <h2>Showing contents of Drinks table:</h2>
+        <h2>Likes per drink:</h2>
         <div class="grid-container">
             <table border="1">
                 <tr>

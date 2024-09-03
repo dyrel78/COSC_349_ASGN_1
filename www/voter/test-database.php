@@ -61,26 +61,65 @@
                 echo "</tr>\n";
             }
 
-            $a = $pdo->query("SELECT * FROM Users");
+        } catch (PDOException $e) {
+            echo "Database error: " . htmlspecialchars($e->getMessage());
+        }
+        ?>
 
-            while ($row = $a->fetch()) {
+
+
+    </table>
+
+
+    <table border ="1">
+        <!-- Do a table for users -->
+        <tr>
+            <th>User ID</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Admin Flag</th>
+            <th>Email</th>
+            <th>Liked Drink ID</th>
+            <th>Age</th>
+            <th>Gender</th>
+        </tr>
+
+        <?php
+        $db_host   = '192.168.2.12';
+        $db_name   = 'drinksDB';
+        $db_user   = 'webuser';
+        $db_passwd = 'password';
+
+        $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
+
+        try {
+            $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $q = $pdo->query("SELECT * FROM Users");
+
+            while ($row = $q->fetch()) {
                 echo "<tr>";
                 echo "<td>" . htmlspecialchars($row["id"]) . "</td>";
                 echo "<td>" . htmlspecialchars($row["username"]) . "</td>";
-                echo "<td>" . htmlspecialchars($row["password"]) . "</td>";
+                echo "<td>" . htmlspecialchars($row["user_password"]) . "</td>";
+                echo "<td>" . htmlspecialchars($row["admin_flag"]) . "</td>";
                 echo "<td>" . htmlspecialchars($row["email"]) . "</td>";
-                echo "<td>" . htmlspecialchars($row["role"]) . "</td>";
+                echo "<td>" . htmlspecialchars($row["liked_drink_id"]) . "</td>";
+                echo "<td>" . htmlspecialchars($row["age"]) . "</td>";
+                echo "<td>" . htmlspecialchars($row["gender"]) . "</td>";
+         
 
                 echo "</tr>\n";
             }
-
-
-
 
         } catch (PDOException $e) {
             echo "Database error: " . htmlspecialchars($e->getMessage());
         }
         ?>
+
+
+
     </table>
 </body>
 </html>

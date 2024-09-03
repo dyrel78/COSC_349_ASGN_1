@@ -77,6 +77,21 @@ body {
     background-color: #adb0b3;
   }
 
+  .card-item select{
+    width: 50%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
+  .card-item option{
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
 
   .submit-button{
     padding: 10px 20px;
