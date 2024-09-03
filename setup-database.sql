@@ -111,19 +111,19 @@ END;
 //
 DELIMITER ;
 
--- DELIMITER //
+DELIMITER //
 
--- CREATE TRIGGER decrement_likes
--- AFTER DELETE ON UserLikes
--- FOR EACH ROW
--- BEGIN
---     UPDATE Drinks
---     SET likes = likes - 1
---     WHERE id = OLD.drink_id;
--- END;
--- //
+CREATE TRIGGER decrement_likes
+AFTER DELETE ON UserLikes
+FOR EACH ROW
+BEGIN
+    UPDATE Drinks
+    SET likes = likes - 1
+    WHERE id = OLD.drink_id;
+END;
+//
 
--- DELIMITER ;
+DELIMITER ;
 
 -- INSERT INTO UserLikes (user_id, drink_id) VALUES (4, 2);
 
