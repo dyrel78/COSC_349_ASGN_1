@@ -60,13 +60,21 @@ mysql -u root -e "CREATE DATABASE drinksDB;"
 
 # Create user (without GRANT)
 mysql -u root -e "CREATE USER 'webuser'@'%' IDENTIFIED BY 'password';"
-
 # Grant privileges separately
 mysql -u root -e "GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'webuser'@'%';"
 mysql -u root -e "GRANT SUPER ON *.* TO 'webuser'@'%';"
-mysql -u root -e "GRANT ALL PRIVILEGES ON drinksDB.* TO 'webuser'@'%';"
 
+# CHANGE THIS TO READ ONLY ACCESS, NO WRITE ACCESS
+
+mysql -u root -e "GRANT ALL PRIVILEGES ON drinksDB.* TO 'webuser'@'%';"
 # Flush privileges
+mysql -u root -e "FLUSH PRIVILEGES;"
+
+mysql -u root -e "CREATE USER 'admin_account'@'%' IDENTIFIED BY 'strong_admin_password';"
+mysql -u root -e "GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'admin_account'@'%';"
+mysql -u root -e "GRANT SUPER ON *.* TO 'admin_account'@'%';"
+mysql -u root -e "GRANT ALL PRIVILEGES ON drinksDB.* TO 'admin_account'@'%';"
+
 mysql -u root -e "FLUSH PRIVILEGES;"
 
 # Set the MYSQL_PWD shell variable that the mysql command will

@@ -82,7 +82,7 @@
 
     <div class="container">
         <nav class="navbar">
-            <div class="navbar-logo">Drinks App</div>
+            <div class="navbar-logo">Drink of the Week</div>
             <ul class="navbar-links">
                 <li><a href="admin-page.php">Home</a></li>
                 <!-- <li><a href="/add">Add Drink</a></li> -->
@@ -90,21 +90,21 @@
                 <!-- <li><a href="about.php">About</a></li> -->
             </ul>
         </nav>
-        <h1>Database Test Page </h1>
+        <h1>Admin Stats Page </h1>
 
         <h2>Likes per drink:</h2>
         <div class="grid-container">
             <table border="1">
                 <tr>
                     <th>Name of Drink</th>
-                    <th>Likes TESTING</th>
+                    <th>      Likes     </th>
                 </tr>
 
                 <?php
                 $db_host   = '192.168.2.12';
                 $db_name   = 'drinksDB';
-                $db_user   = 'webuser';
-                $db_passwd = 'password';
+                $db_user   = 'admin_account';
+                $db_passwd = 'strong_admin_password';
 
                 $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
 
