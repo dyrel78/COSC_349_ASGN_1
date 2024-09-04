@@ -90,7 +90,7 @@ try {
             //check if user is logged in
             if (isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] == true) {
                 echo "<nav class='navbar'>";
-                echo "<div class='navbar-logo'>Drinks App</div>";
+                echo "<div class='navbar-logo'>Drink of the Week</div>";
                 echo "<ul class='navbar-links'>";
                 echo "<li><a href='index.php'>Home</a></li>";
                 echo "<li><a href='logout.php'>Logout</a></li>";
@@ -101,7 +101,7 @@ try {
 
             } else {
                 echo "<nav class='navbar'>";
-                echo "<div class='navbar-logo'>Drinks App</div>";
+                echo "<div class='navbar-logo'>Drink of the Week</div>";
                 echo "<ul class='navbar-links'>";
                 echo "<li><a href='index.php'>Home</a></li>";
                 echo "<li><a href='create-account.php'>Create Account</a></li>";

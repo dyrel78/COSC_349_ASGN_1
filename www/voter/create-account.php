@@ -107,7 +107,7 @@ $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
 ); -->
     <div class="container">
         <nav class="navbar">
-            <div class="navbar-logo">Drinks App</div>
+            <div class="navbar-logo">Drink of the Week</div>
             <ul class="navbar-links">
                 <li><a href="index.php">Home</a></li>
                 <li><a href="login.php">Login</a></li>

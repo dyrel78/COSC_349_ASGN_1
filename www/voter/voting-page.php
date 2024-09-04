@@ -33,7 +33,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             justify-content: center;
             gap: 1rem;
             flex-direction: row;
-
             padding: 1rem;
             /* border: solid 3px red; */
         }
@@ -41,16 +40,17 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             /* Navbar.css */
 
         .footer {
-            position: fixed;
+            /* position: fixed; */
+            position:sticky;
             width: 100%;
-            height: 2.5%;
+            /* height: 2.5%; */
 
         }
         .footer >p {
             color: #fff;
             font-size: 1rem;
             font-weight: bold;
-            margin-right: 50px;
+            margin-right: 35px;
 
             }
 
@@ -69,7 +69,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     <div class="card-container">
 
         <nav class="navbar">
-            <div class="navbar-logo">Drinks App</div>
+            <div class="navbar-logo">Drink of the Week</div>
             <ul class="navbar-links">
                 <li><a href="index.php">Home</a></li>
                 <!-- <li><a href="/add">Add Drink</a></li> -->
@@ -168,6 +168,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
         </div>
 
     </div>
+   
 
 </body>
 

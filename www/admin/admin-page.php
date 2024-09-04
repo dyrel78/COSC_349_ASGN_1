@@ -84,9 +84,9 @@
         <nav class="navbar">
             <div class="navbar-logo">Drinks App</div>
             <ul class="navbar-links">
-                <li><a href="index.php">Home</a></li>
+                <li><a href="admin-page.php">Home</a></li>
                 <!-- <li><a href="/add">Add Drink</a></li> -->
-                <li><a href="logout.php">Logout</a></li>
+                <!-- <li><a href="logout.php">Logout</a></li> -->
                 <!-- <li><a href="about.php">About</a></li> -->
             </ul>
         </nav>
