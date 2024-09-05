@@ -73,6 +73,7 @@ $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
             <div class="navbar-logo">Drink of the Week</div>
             <ul class="navbar-links">
                 <li><a href="admin-page.php">Home</a></li>
+                <li><a href="admin-view-voting-page-preview.php">View Voting Page</a></li>
                 <!-- <li><a href="logout.php">Logout</a></li> -->
                 <!-- <li><a href="voting-page.php">Vote for the next drink of the week</a></li> -->
             </ul>
@@ -95,12 +96,13 @@ $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
                 
                 <input type="submit" value="Upload Drink">
             </form>
-        </div>
-        <?php
+            <?php
         if (isset($error_message)) {
             echo "<p class='" . (isset($error) ? 'error-message' : 'success-message') . "'>" . htmlspecialchars($error_message) . "</p>";
         }
         ?>
+        </div>
+      
 
 
         <footer class="footer">

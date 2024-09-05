@@ -7,6 +7,7 @@ body {
     /* font-family: Arial, sans-serif; */
     font-family: "montserrat";
     background-color: #f4f4f4;
+
     margin: 0;
     /* display: flex; */
     /* justify-content: center;
@@ -32,9 +33,12 @@ body {
     box-shadow: 0 0 10px #0000001a;
     height: 100vh;
     width: 100vw;
+
+    
 }
 .container {
     background-color: #fff;
+
     /* padding: 20px; */
     /* border-radius: 5px;
     box-shadow: 0 0 10px #0000001a; */

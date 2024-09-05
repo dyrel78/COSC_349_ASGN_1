@@ -1,9 +1,18 @@
 /* Navbar.css */
 
+.navbar,.footer{
+
+  /* background-image: linear-gradient(to right, #26baee,#9fe8fa); */
+  background-color: #26baee;
+  /*   background-image: linear-gradient(to right, #26baee,#9fe8fa);
+ */
+
+}
 .navbar{
     /* background-color: #333; */
     /* background-color: #fe56b8; */
-    background-color: #ee1317;
+    /* background-color: #ee1317; */
+    /* background-image: linear-gradient(180deg, #ee1317 0%, #f7d9d9 74%); */
     padding: 1rem;
     display: flex;
     justify-content: space-between;
@@ -17,7 +26,7 @@
     bottom: 0;
     /* background-color: #333; */
     /* background-color: #fe56b8; */
-    background-color: #ee1317;
+    /* background-color: #ee1317; */
     padding: 0.5rem;
     display: flex;
     justify-content: space-between;

@@ -46,7 +46,9 @@
 
         /* Navbar container */
         .navbar {
-            background-color: #0073e6;
+            /* background-color: #0073e6; */
+            background-color: #005bb5;
+            
             overflow: hidden;
         }
 
@@ -85,6 +87,8 @@
             <div class="navbar-logo">Drink of the Week</div>
             <ul class="navbar-links">
                 <li><a href="admin-page.php">Home</a></li>
+                <li><a href="upload-page.php">Upload a Drink</a></li>
+                <li><a href="admin-view-voting-page-preview.php">View Voting Page</a></li>
                 <!-- <li><a href="/add">Add Drink</a></li> -->
                 <!-- <li><a href="logout.php">Logout</a></li> -->
                 <!-- <li><a href="about.php">About</a></li> -->

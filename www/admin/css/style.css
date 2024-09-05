@@ -7,6 +7,7 @@ body {
     /* font-family: Arial, sans-serif; */
     font-family: "montserrat";
     background-color: #f4f4f4;
+    margin: 0;
     /* display: flex; */
     /* justify-content: center;
     align-items: center;
@@ -71,9 +72,18 @@ body {
 
 
 .login-container{
-    align-items: center;
-    align-content: center;
+    /* align-items: center;
+    align-content: center; */
+    margin: 0 auto;
+    background-color: #f4f4f9;
+    padding: 20px;
+    padding-top: -500px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #0000001a;
+    height: 100vh; 
+    padding-bottom: 0px;
 }
+
 .login-container h2 {
     margin: 0 0 20px;
     margin-top: 20px;

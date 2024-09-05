@@ -28,6 +28,12 @@ body {
     flex-direction: row;
     
   } */
+
+.card-grid{
+  /* background-image: linear-gradient(180deg, #9fe8fa, #f4f4f9); */
+  background-color: #9fe8fa;
+
+}
   
  
   
