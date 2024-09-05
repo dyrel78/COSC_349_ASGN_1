@@ -34,23 +34,23 @@ create table UserLikes (
     foreign key (drink_id) references Drinks(id)
 );
 
-create table DrinkOfTheWeek (
-    id int primary key auto_increment,
-    drink_id int,
-    foreign key (drink_id) references Drinks(id)
-);
+-- create table DrinkOfTheWeek (
+--     id int primary key auto_increment,
+--     drink_id int,
+--     foreign key (drink_id) references Drinks(id)
+-- );
 
 
 -- Dummy data sources from ChatGPT--
 
 
 INSERT INTO Drinks (name_of_drink, descripton, price, rating, likes) VALUES
-('Whiskey', 'A strong alcoholic beverage made from grains', 8.50, 4.70, 0),
-('Vodka', 'A clear, distilled alcoholic beverage with a neutral flavor', 7.00, 4.50, 0),
-('Beer', 'A refreshing beverage made from barley and hops', 3.00, 3.30, 0),
-('Red Wine', 'A smooth wine made from red grapes', 10.00, 4.60, 0),
-('Gin', 'A distilled alcoholic drink with a prominent juniper berry flavor', 6.50, 4.40, 0),
-('Tequila', 'A strong distilled spirit made from the agave plant', 9.00, 4.80, 0)
+('Mojito', 'A classic cocktail for a party using fresh mint, white rum, sugar, zesty lime and cooling soda water.', 8.50, 4.70, 0),
+('Strawberry Daquiri', 'A tasty cold cocktail using rum, sugar and frozen strawberries ', 7.00, 4.50, 0),
+('Espresso Martini', 'A sophisticated cocktail made with vodka, espresso, coffee liqueur, and a sugar rim.', 9.00, 3.30, 0),
+('Pina Colada', 'A tropical cocktail made with rum, coconut cream, and pineapple juice.', 10.00, 4.60, 0),
+('Old Fashioned', 'A classic whiskey cocktail made with bourbon, sugar, bitters, and a twist of orange.', 6.50, 4.40, 0),
+('Margarita', 'A popular Mexican cocktail made with tequila, lime juice, and triple sec.t', 9.00, 4.80, 0)
 ;
 
 
@@ -76,8 +76,8 @@ INSERT INTO UserLikes (user_id, drink_id) VALUES
 (8, 1);  -- Mike Brown likes
 ;
 
-INSERT INTO DrinkOfTheWeek (drink_id) VALUES
-(1); -- Whiskey is the drink of the week
+-- INSERT INTO DrinkOfTheWeek (drink_id) VALUES
+-- (1); -- Whiskey is the drink of the week
 
 
 
@@ -88,28 +88,11 @@ SET d.likes = (
     WHERE ul.drink_id = d.id
 );
 
--- CREATE TRIGGER `increment_likes`
--- AFTER INSERT ON UserLikes
--- FOR EACH ROW
--- BEGIN
---     UPDATE Drinks
---     SET likes = likes + 1
---     WHERE id = NEW.drink_id;
--- END;
-
--- CREATE TRIGGER `decrement_likes`
--- AFTER DELETE ON UserLikes
--- FOR EACH ROW
--- BEGIN
---     UPDATE Drinks
---     SET likes = likes - 1
---     WHERE id = OLD.drink_id;
--- END;
 
 
 
--- DROP TRIGGER IF EXISTS increment_likes;
--- DROP TRIGGER IF EXISTS decrement_likes;
+DROP TRIGGER IF EXISTS increment_likes;
+DROP TRIGGER IF EXISTS decrement_likes;
 
 DELIMITER //
 
@@ -138,12 +121,3 @@ END;
 
 DELIMITER ;
 
--- INSERT INTO UserLikes (user_id, drink_id) VALUES (4, 2);
-
--- AFTER INSERT ON UserLikes
--- FOR EACH ROW
--- BEGIN
---     UPDATE Drinks
---     SET likes = likes + 1
---     WHERE id = NEW.drink_id;
--- END;
