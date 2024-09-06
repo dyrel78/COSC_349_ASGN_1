@@ -125,6 +125,7 @@
                             echo "<tr>";
                             echo "<td>" . htmlspecialchars($row["name_of_drink"]) . "</td>";
                             echo "<td>" . htmlspecialchars($row["likes"]) . "</td>";
+                            
                             echo "</tr>\n";
                         }
                     } else {
@@ -134,19 +135,30 @@
                     // Suggest drinks with rating below a certain threshold
                     echo "</table>";
 
-                    $threshold = 4.0; // Adjust the threshold as needed
-                    $sql = "SELECT name_of_drink, rating FROM Drinks WHERE rating < :threshold";
+                    $threshold = 1; // Adjust the threshold as needed
+                    $sql = "SELECT name_of_drink, likes,id FROM Drinks WHERE likes <= :threshold";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute([':threshold' => $threshold]);
 
                     if ($stmt->rowCount() > 0) {
                         echo "<h2>Drinks to Consider Removing or Improving:</h2>";
-                        echo "<h3>Drinks with a rating below $threshold:</h3>";
-                        echo "<table border='1'><tr><th>Name of Drink</th><th>Rating</th></tr>";
+                        echo "<h3>Drinks with low amount of likes:</h3>";
+                        echo "<table border='1'><tr><th>Name of Drink</th><th>Likes</th> <th> Remove Drink</th></tr>";
                         while ($row = $stmt->fetch()) {
                             echo "<tr>";
                             echo "<td>" . htmlspecialchars($row["name_of_drink"]) . "</td>";
-                            echo "<td>" . htmlspecialchars($row["rating"]) . "</td>";
+                            echo "<td>" . htmlspecialchars($row["likes"]) . "</td>";
+                            echo "<td>". htmlspecialchars($row["id"]) . "</td>";
+                            //remove button
+                            // echo "<td><a href='remove-drink.php?id=" . htmlspecialchars($row["id"]) . "'>Remove</a></td>";
+                            echo "<td>";
+                            // Form with POST request
+                            echo "<form action='remove-drink.php' method='post'>";
+                            echo "<input type='hidden' name='id' value='" . htmlspecialchars($row["id"]) . "'>";
+                            echo "<input class='submit-button' type='submit' value='Remove'>";
+                            echo "</form>";
+                            echo "</td>";
+
                             echo "</tr>\n";
                         }
                         echo "</table>";
