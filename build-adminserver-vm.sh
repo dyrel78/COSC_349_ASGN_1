@@ -2,11 +2,11 @@
 # Adapated from  https://altitude.otago.ac.nz/cosc349/vagrant-multivm
 # Original Author: David Eyers
 
-apt-get update
-apt-get install -y apache2 php libapache2-mod-php php-mysql
+sudo apt-get update
+sudo apt-get install -y apache2 php libapache2-mod-php php-mysql
 
-cp /vagrant/admin-website.conf /etc/apache2/sites-available/
+sudo cp /vagrant/admin-website.conf /etc/apache2/sites-available/
 
-a2ensite admin-website
-a2dissite 000-default
-service apache2 restart
+sudo a2ensite admin-website
+sudo a2dissite 000-default
+sudo service apache2 restart

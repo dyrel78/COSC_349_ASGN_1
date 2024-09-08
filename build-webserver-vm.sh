@@ -4,16 +4,16 @@
 
 #!/bin/bash
 
-apt-get update
-apt-get install -y apache2 php libapache2-mod-php php-mysql
-            
+sudo apt-get update
+# apt-get install -y apache2 php libapache2-mod-php php-mysql lsof iputils-ping
+sudo apt-get install -y apache2 php libapache2-mod-php php-mysql lsof iputils-ping
 # Change VM's webserver's configuration to use shared folder.
 # (Look inside test-website.conf for specifics.)
-cp /vagrant/user-website.conf /etc/apache2/sites-available/
+sudo cp /vagrant/user-website.conf /etc/apache2/sites-available/
 
 # activate our website configuration ...
-a2ensite user-website
+sudo a2ensite user-website
 # ... and disable the default website provided with Apache
-a2dissite 000-default
+sudo a2dissite 000-default
 # Restart the webserver, to pick up our configuration changes
-service apache2 restart
+sudo service apache2 restart

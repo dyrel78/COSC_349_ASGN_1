@@ -4,7 +4,7 @@
 # Original Author: David Eyers
 
 # Update Ubuntu software packages.
-apt-get update
+sudo apt-get update
       
 # We create a shell variable MYSQL_PWD that contains the MySQL root password
 export MYSQL_PWD='root_password'
@@ -21,7 +21,7 @@ echo "mysql-server mysql-server/root_password_again password $MYSQL_PWD" | debco
 
 # Install the MySQL database server.
 # apt-get -y install lsof
-apt-get -y install mysql-server
+sudo apt-get -y install mysql-server
 # On normal VMs MySQL server will now be running, but starting
 # the service explicitly even if it's started causes no warnings.
 # (... and it _is_ necessary for some Docker testing I'm doing)
@@ -29,7 +29,6 @@ service mysql start
 
 # ## MY ADDITION
 # echo "SET GLOBAL log_bin_trust_function_creators = 1;" | mysql 
-
 
 # # Run some setup commands to get the database ready to use.
 # # First create a database.
@@ -51,31 +50,56 @@ service mysql start
 # echo "FLUSH PRIVILEGES;" | mysql
 
 ## A
+echo "SET GLOBAL log_bin_trust_function_creators = 1;" | mysql -u root
 
-# Set global variable which allows functions to be created ( SOLVES THE TRIGGER PROBLEM)
-mysql -u root -e "SET GLOBAL log_bin_trust_function_creators = 1;"
-
-# First create a database.
-mysql -u root -e "CREATE DATABASE drinksDB;"
+# Create the database
+echo "CREATE DATABASE drinksDB;" | mysql -u root
 
 # Create user (without GRANT)
-mysql -u root -e "CREATE USER 'webuser'@'%' IDENTIFIED BY 'password';"
+echo "CREATE USER 'webuser'@'%' IDENTIFIED BY 'password';" | mysql -u root
+
 # Grant privileges separately
-mysql -u root -e "GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'webuser'@'%';"
-mysql -u root -e "GRANT SUPER ON *.* TO 'webuser'@'%';"
+echo "GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'webuser'@'%';" | mysql -u root
+echo "GRANT SUPER ON *.* TO 'webuser'@'%';" | mysql -u root
 
-# CHANGE THIS TO READ ONLY ACCESS, NO WRITE ACCESS
+# Grant read/write privileges on drinksDB (you can adjust this if needed to make it read-only)
+echo "GRANT ALL PRIVILEGES ON drinksDB.* TO 'webuser'@'%';" | mysql -u root
 
-mysql -u root -e "GRANT ALL PRIVILEGES ON drinksDB.* TO 'webuser'@'%';"
 # Flush privileges
-mysql -u root -e "FLUSH PRIVILEGES;"
+echo "FLUSH PRIVILEGES;" | mysql -u root
 
-mysql -u root -e "CREATE USER 'admin_account'@'%' IDENTIFIED BY 'strong_admin_password';"
-mysql -u root -e "GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'admin_account'@'%';"
-mysql -u root -e "GRANT SUPER ON *.* TO 'admin_account'@'%';"
-mysql -u root -e "GRANT ALL PRIVILEGES ON drinksDB.* TO 'admin_account'@'%';"
+# Create admin user with strong password
+echo "CREATE USER 'admin_account'@'%' IDENTIFIED BY 'strong_admin_password';" | mysql -u root
+echo "GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'admin_account'@'%';" | mysql -u root
+echo "GRANT SUPER ON *.* TO 'admin_account'@'%';" | mysql -u root
+echo "GRANT ALL PRIVILEGES ON drinksDB.* TO 'admin_account'@'%';" | mysql -u root
 
-mysql -u root -e "FLUSH PRIVILEGES;"
+# Flush privileges again
+echo "FLUSH PRIVILEGES;" | mysql -u root
+# # Set global variable which allows functions to be created ( SOLVES THE TRIGGER PROBLEM)
+# mysql -u root -e "SET GLOBAL log_bin_trust_function_creators = 1;"
+
+# # First create a database.
+# mysql -u root -e "CREATE DATABASE drinksDB;"
+
+# # Create user (without GRANT)
+# mysql -u root -e "CREATE USER 'webuser'@'%' IDENTIFIED BY 'password';"
+# # Grant privileges separately
+# mysql -u root -e "GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'webuser'@'%';"
+# mysql -u root -e "GRANT SUPER ON *.* TO 'webuser'@'%';"
+
+# # CHANGE THIS TO READ ONLY ACCESS, NO WRITE ACCESS
+
+# mysql -u root -e "GRANT ALL PRIVILEGES ON drinksDB.* TO 'webuser'@'%';"
+# # Flush privileges
+# mysql -u root -e "FLUSH PRIVILEGES;"
+
+# mysql -u root -e "CREATE USER 'admin_account'@'%' IDENTIFIED BY 'strong_admin_password';"
+# mysql -u root -e "GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'admin_account'@'%';"
+# mysql -u root -e "GRANT SUPER ON *.* TO 'admin_account'@'%';"
+# mysql -u root -e "GRANT ALL PRIVILEGES ON drinksDB.* TO 'admin_account'@'%';"
+
+# mysql -u root -e "FLUSH PRIVILEGES;"
 
 # Set the MYSQL_PWD shell variable that the mysql command will
 # try to use as the database password ...

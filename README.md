@@ -1,15 +1,44 @@
-# Welcome to my app - Drink of the week 
+# Drink of the week 
 
+### By Dyrel Lumiwes
 This is a web application that allows bar staff to monitor which drinks are preferred by customers and which drinks are not using a rating and voting system.
 
+Technologies used: Vagrant, Docker, MySQL, HTML, CSS, Shell, PHP
 
 
-# How to use this application
+
+## How to use this application
 
 * Firstly, make sure you have Docker Desktop installed and running
 * Clone this repository to your local machine
 * Then, navigate to the directory where the repository is stored
 
+## Prerequisites:
+In order to run this application you must install Vagrant and Virtual box to provision and run the virtual machines's that power the application.
+
+## How to run the application:
+To get started, open VirtualBox and the command prompt, or other terminal.
+If VirtualBox is not open, provisioning the VMs will often timout, and the application may not launch correctly.
+
+1. Download or clone the repository:
+```
+git clone https://github.com/dyrel78/COSC_349_ASGN_1.git
+```
+
+2. In your terminal, navigate to the directory of the repository:
+```
+cd your/path/to/COSC_349_ASGN_1
+```
+
+3. Run the vagrant command.
+```
+vagrant up
+```
+
+4. Open your web browser and in the url bar, paste the following link:
+```
+192.168.56.11:3000
+```
 </br>
 
 
@@ -107,12 +136,13 @@ The VM's and their IP addresses are as follows:
 
 | Name of Drink | Description                                              | Price | Rating | Likes |
 |---------------|----------------------------------------------------------|-------|--------|-------|
-| Whiskey       | A strong alcoholic beverage made from grains             | 8.50  | 4.70   | 0     |
-| Vodka         | A clear, distilled alcoholic beverage with a neutral flavor | 7.00  | 4.50   | 0     |
-| Beer          | A refreshing beverage made from barley and hops          | 3.00  | 3.30   | 0     |
-| Red Wine      | A smooth wine made from red grapes                       | 10.00 | 4.60   | 0     |
-| Gin           | A distilled alcoholic drink with a prominent juniper berry flavor | 6.50  | 4.40   | 0     |
-| Tequila       | A strong distilled spirit made from the agave plant      | 9.00  | 4.80   | 0     |
+| Mojito        | A classic cocktail for a party using fresh mint, white rum, sugar, zesty lime and cooling soda water. | 8.50 | 4.70 | 0 |
+| Strawberry Daquiri | A tasty cold cocktail using rum, sugar and frozen strawberries | 7.00 | 4.50 | 0 |
+| Espresso Martini | A sophisticated cocktail made with vodka, espresso, coffee liqueur, and a sugar rim. | 9.00 | 3.30 | 0 |
+| Pina Colada | A tropical cocktail made with rum, coconut cream, and pineapple juice. | 10.00 | 4.60 | 0 |
+| Old Fashioned | A classic whiskey cocktail made with bourbon, sugar, bitters, and a twist of orange. | 6.50 | 4.40 | 0 |
+| Margarita | A popular Mexican cocktail made with tequila, lime juice, and triple sec. | 9.00 | 4.80 | 0 |
+
 
 ### Users Table
 
@@ -126,6 +156,9 @@ The VM's and their IP addresses are as follows:
 | false      | chris_lee   | chris@example.com  | password123  | 5              | 22  | female |
 | false      | sarah_brown | sarah@example.com  | password123  | 1              | 18  | female |
 | false      | mike_brown  | mike@example.com   | password123  | 1              | 20  | female |
+| false      | joe_brown   | joe@examples.com   | password     | 6              | 55  | other  |
+| false      | peter_parker| peter@examples.com | password     | 5              | 45  | other  |
+
 
 ### UserLikes Table
 
@@ -134,6 +167,13 @@ The VM's and their IP addresses are as follows:
 | 1       | 1        |
 | 2       | 2        |
 | 3       | 3        |
+| 5       | 5        |
+| 6       | 6        |
+| 7       | 1        |
+| 8       | 1        |
+| 9       | 6        |
+| 10      | 5        |
+
 
 
 
