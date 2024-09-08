@@ -49,7 +49,7 @@ The admin interface allows admin staff a more privileged access system to the ap
 <br>
 
 # How to run the application:
-* Firstly, make sure you have Docker Desktop installed and running
+* Firstly, make sure you have downloaded Docker Desktop and Vagrant and the former is running
 
 
 To get started, open terminal
