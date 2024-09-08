@@ -31,14 +31,26 @@ vagrant up
 ```
 
 4. Open your web browser and in the url bar, paste the following link:
+
+Using as a voter
 ```
 localhost:8080
+OR
+127.0.0.1:8080
+```
+
+Using as admin staff
+```
+localhost:8081
+OR
+127.0.0.1:8081
+
 ```
 
 </br>
 
 
-### Accessing the Virtual Machines
+### <ins> Accessing the Virtual Machines </ins>
 
 Accessing each of the virtual machines can be done via the vagrant ssh <container_name> command. For example
 ```
