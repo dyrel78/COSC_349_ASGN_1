@@ -1,18 +1,57 @@
 # Drink of the week 
 
 ### By Dyrel Lumiwes
-This is a web application that allows bar staff to monitor which drinks are preferred by customers and which ones are not using a voting system.
+This is a web application that allows bar staff to monitor which drinks are preferred by customers and which ones are not using a voting system. Each voter is only allowed to vote once for their favourite drink. The application also allows the admin staff to manage the database and update drinks available in the bar.
 
 Technologies used: Vagrant, Docker, MySQL, HTML, CSS, Shell, PHP
 
+<br>
+
+## Architecture of the project
+
+This repository consists of 3 Virtual Machine's (VM) which are provisioned using Vagrant. However, there is also a docker image containing the web application. This enables arm64 CPU architecture to run the application.
+
+The VM's are all connected to an internal network with the following IP address 192.168.2.xx. This enables them to communicate with each other and the host machine. The web application is hosted on the user interface VM and can be accessed by the host machine on port 8080. The database is hosted on the database VM and can be accessed by the user interface VM and the admin interface VM. The admin interface VM is used to manage the database and can be accessed by the host machine on port 8081.
+
+The VM's and their IP addresses are as follows:
+
+* User interface - 192.168.2.11
+* Database - 192.168.2.12
+* Admin interface - 192.168.2.13
 
 
-## Prerequisites:
+  <br>
 
+
+## VM 1 - User Interface
+
+This VM is used to run the voter web interface and allow users to interact with the system.
+
+Users can create an account, log in view the drinks available, vote for their favourite drink, and view the current drink of the week.
+
+<br>
+
+## VM 2 - Database
+
+This VM is used to run the MySQL database and store the data for the application. It contains 3 tables: Drinks, Users, and UserLikes.
+
+* Drinks - Contains the details of each drink available in the bar.
+* Users - Contains the details of each user who has created an account.
+* UserLikes - Contains the details of each user who has voted for a drink.
+
+<br>
+
+## VM 3 - Admin Interface
+
+The admin interface allows admin staff a more privileged access system to the application. Admin staff view drinks stats by a variety of different metrics, add new drinks to the database, and delete drinks from the database.
+
+
+<br>
+
+# How to run the application:
 * Firstly, make sure you have Docker Desktop installed and running
-  
 
-## How to run the application:
+
 To get started, open terminal
 
 1. Download or clone the repository:
@@ -133,21 +172,12 @@ mysql -u root
 
 
 
-## Architecture of the project
-
-This repository consists of 3 Virtual Machine's (VM) which are provisioned using Vagrant. However, there is also a docker image containing the web application. This enables arm64 CPU architecture to run the application.
-
-The VM's are all connected to an internal network with the following IP address 192.168.2.xx. This enables them to communicate with each other and the host machine. The web application is hosted on the user interface VM and can be accessed by the host machine on port 8080. The database is hosted on the database VM and can be accessed by the user interface VM and the admin interface VM. The admin interface VM is used to manage the database and can be accessed by the host machine on port 8081.
-
-The VM's and their IP addresses are as follows:
-
-* User interface - 192.168.2.11
-* Database - 192.168.2.12
-* Admin interface - 192.168.2.13
 
 
 
 ## Dummy Data
+
+The setup-database.sql file contains the schema and dummy data for the database. The database consists of 3 tables: Drinks, Users, and UserLikes. The schema for each table is as follows:
 
 ### Drinks Table
 
