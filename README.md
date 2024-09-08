@@ -1,24 +1,19 @@
 # Drink of the week 
 
 ### By Dyrel Lumiwes
-This is a web application that allows bar staff to monitor which drinks are preferred by customers and which drinks are not using a rating and voting system.
+This is a web application that allows bar staff to monitor which drinks are preferred by customers and which ones are not using a voting system.
 
 Technologies used: Vagrant, Docker, MySQL, HTML, CSS, Shell, PHP
 
 
 
-## How to use this application
+## Prerequisites:
 
 * Firstly, make sure you have Docker Desktop installed and running
-* Clone this repository to your local machine
-* Then, navigate to the directory where the repository is stored
-
-## Prerequisites:
-In order to run this application you must install Vagrant and Virtual box to provision and run the virtual machines's that power the application.
+  
 
 ## How to run the application:
-To get started, open VirtualBox and the command prompt, or other terminal.
-If VirtualBox is not open, provisioning the VMs will often timout, and the application may not launch correctly.
+To get started, open terminal
 
 1. Download or clone the repository:
 ```
@@ -37,19 +32,30 @@ vagrant up
 
 4. Open your web browser and in the url bar, paste the following link:
 ```
-192.168.56.11:3000
+localhost:8080
 ```
+
 </br>
 
 
+### Accessing the Virtual Machines
 
-### <ins>Starting the application</ins>
+Accessing each of the virtual machines can be done via the vagrant ssh <container_name> command. For example
+```
+vagrant ssh webserver
+```
+
+```
+vagrant ssh adminserver
+```
+
+```
+vagrant ssh dbserver
+```
+
+### <ins> Restarting the application after initial build</ins>
   
-
-`vagrant up` &rarr; This will start the application and the 3 VM's
-
-mysql -u root -p
-password --> password
+`vagrant up` &rarr; This will restart the application and the 3 VM's
 
 </br>
 
@@ -77,7 +83,8 @@ vagrant provision adminserver --provision-with restart
 
 ```
 vagrant reload
-```  
+```
+
 </br>
 
 
@@ -117,8 +124,6 @@ mysql -u root
 ## Architecture of the project
 
 This repository consists of 3 Virtual Machine's (VM) which are provisioned using Vagrant. However, there is also a docker image containing the web application. This enables arm64 CPU architecture to run the application.
-
-
 
 The VM's are all connected to an internal network with the following IP address 192.168.2.xx. This enables them to communicate with each other and the host machine. The web application is hosted on the user interface VM and can be accessed by the host machine on port 8080. The database is hosted on the database VM and can be accessed by the user interface VM and the admin interface VM. The admin interface VM is used to manage the database and can be accessed by the host machine on port 8081.
 
