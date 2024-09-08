@@ -4,9 +4,7 @@
 <head>
     <title>Database Test Page</title>
     <style>
-        <?php include 'css/style.css'; ?>
-        <?php include 'css/navbar.css'; ?>
-        <?php include 'css/data-display-page.css'; ?>@font-face {
+        <?php include 'css/style.css'; ?><?php include 'css/navbar.css'; ?><?php include 'css/data-display-page.css'; ?>@font-face {
             font-family: "montserrat";
             src: url(css/Montserrat-Regular.woff2);
         }
@@ -48,7 +46,7 @@
         .navbar {
             /* background-color: #0073e6; */
             background-color: #005bb5;
-            
+
             overflow: hidden;
         }
 
@@ -68,6 +66,24 @@
             background-color: #005bb5;
             color: white;
         }
+
+        .remove-drink {
+            /* background-color: #f44336; */
+            background-color: #f4f4f4;
+            color: white;
+            /* padding: 10px 20px; */
+            /* border: none; */
+            cursor: pointer;
+            /* border-radius: 5px; */
+        }
+
+        .remove-drink-td{
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        
+
+
 
         /* Responsive Navbar */
         @media screen and (max-width: 600px) {
@@ -89,9 +105,6 @@
                 <li><a href="admin-page.php">Home</a></li>
                 <li><a href="upload-page.php">Upload a Drink</a></li>
                 <li><a href="admin-view-voting-page-preview.php">View Voting Page</a></li>
-                <!-- <li><a href="/add">Add Drink</a></li> -->
-                <!-- <li><a href="logout.php">Logout</a></li> -->
-                <!-- <li><a href="about.php">About</a></li> -->
             </ul>
         </nav>
         <h1>Admin Stats Page </h1>
@@ -101,7 +114,7 @@
             <table border="1">
                 <tr>
                     <th>Name of Drink</th>
-                    <th>      Likes     </th>
+                    <th> Likes </th>
                 </tr>
 
                 <?php
@@ -125,7 +138,6 @@
                             echo "<tr>";
                             echo "<td>" . htmlspecialchars($row["name_of_drink"]) . "</td>";
                             echo "<td>" . htmlspecialchars($row["likes"]) . "</td>";
-                            
                             echo "</tr>\n";
                         }
                     } else {
@@ -148,16 +160,15 @@
                             echo "<tr>";
                             echo "<td>" . htmlspecialchars($row["name_of_drink"]) . "</td>";
                             echo "<td>" . htmlspecialchars($row["likes"]) . "</td>";
-                            echo "<td>". htmlspecialchars($row["id"]) . "</td>";
-                            //remove button
-                            // echo "<td><a href='remove-drink.php?id=" . htmlspecialchars($row["id"]) . "'>Remove</a></td>";
-                            echo "<td>";
+
+                            echo "<td class= 'remove-drink-td'>";
                             // Form with POST request
-                            echo "<form action='remove-drink.php' method='post'>";
+                            echo "<form  class='remove-drink' action='remove-drink.php' method='post'>";
                             echo "<input type='hidden' name='id' value='" . htmlspecialchars($row["id"]) . "'>";
-                            echo "<input class='submit-button' type='submit' value='Remove'>";
+                            echo "<input class='remove-button' type='submit' value='Remove'>";
                             echo "</form>";
                             echo "</td>";
+
 
                             echo "</tr>\n";
                         }
@@ -168,12 +179,12 @@
 
                     // Query to fetch drinks liked by male users, ordered by the number of likes
                     $sql = "SELECT d.name_of_drink, COUNT(ul.user_id) AS male_likes_count
-            FROM Drinks d
-            JOIN UserLikes ul ON d.id = ul.drink_id
-            JOin Users u ON ul.user_id = u.id
-            WHERE u.gender = 'male'
-            GROUP BY d.name_of_drink
-            ORDER BY male_likes_count DESC";
+                        FROM Drinks d
+                        JOIN UserLikes ul ON d.id = ul.drink_id
+                        JOin Users u ON ul.user_id = u.id
+                        WHERE u.gender = 'male'
+                        GROUP BY d.name_of_drink
+                        ORDER BY male_likes_count DESC";
 
                     $stmt = $pdo->query($sql);
 
@@ -220,12 +231,12 @@
 
 
                     $sql = "SELECT d.name_of_drink, COUNT(ul.user_id) AS other_likes_count
-            FROM Drinks d
-            JOIN UserLikes ul ON d.id = ul.drink_id
-            JOin Users u ON ul.user_id = u.id
-            WHERE u.gender = 'other'
-            GROUP BY d.name_of_drink
-            ORDER BY other_likes_count DESC";
+                    FROM Drinks d
+                    JOIN UserLikes ul ON d.id = ul.drink_id
+                    JOin Users u ON ul.user_id = u.id
+                    WHERE u.gender = 'other'
+                    GROUP BY d.name_of_drink
+                    ORDER BY other_likes_count DESC";
 
                     $stmt = $pdo->query($sql);
 
@@ -244,12 +255,12 @@
                     }
 
                     $sql = "SELECT d.name_of_drink, COUNT(ul.user_id) AS 18_24_likes_count
-                FROM Drinks d
-                JOIN UserLikes ul ON d.id = ul.drink_id
-                JOin Users u ON ul.user_id = u.id
-                WHERE u.age BETWEEN 18 AND 24
-                GROUP BY d.name_of_drink
-                ORDER BY 18_24_likes_count DESC";
+                    FROM Drinks d
+                    JOIN UserLikes ul ON d.id = ul.drink_id
+                    JOin Users u ON ul.user_id = u.id
+                    WHERE u.age BETWEEN 18 AND 24
+                    GROUP BY d.name_of_drink
+                    ORDER BY 18_24_likes_count DESC";
 
                     $stmt = $pdo->query($sql);
 
@@ -269,12 +280,12 @@
 
 
                     $sql = "SELECT d.name_of_drink, COUNT(ul.user_id) AS 25_34_likes_count
-                FROM Drinks d
-                JOIN UserLikes ul ON d.id = ul.drink_id
-                JOin Users u ON ul.user_id = u.id
-                WHERE u.age BETWEEN 25 AND 34
-                GROUP BY d.name_of_drink
-                ORDER BY 25_34_likes_count DESC";
+                    FROM Drinks d
+                    JOIN UserLikes ul ON d.id = ul.drink_id
+                    JOin Users u ON ul.user_id = u.id
+                    WHERE u.age BETWEEN 25 AND 34
+                    GROUP BY d.name_of_drink
+                    ORDER BY 25_34_likes_count DESC";
 
                     $stmt = $pdo->query($sql);
 
@@ -294,12 +305,12 @@
 
 
                     $sql = "SELECT d.name_of_drink, COUNT(ul.user_id) AS 35_44_likes_count
-                FROM Drinks d
-                JOIN UserLikes ul ON d.id = ul.drink_id
-                JOin Users u ON ul.user_id = u.id
-                WHERE u.age BETWEEN 35 AND 44
-                GROUP BY d.name_of_drink
-                ORDER BY 35_44_likes_count DESC";
+                    FROM Drinks d
+                    JOIN UserLikes ul ON d.id = ul.drink_id
+                    JOin Users u ON ul.user_id = u.id
+                    WHERE u.age BETWEEN 35 AND 44
+                    GROUP BY d.name_of_drink
+                    ORDER BY 35_44_likes_count DESC";
 
                     $stmt = $pdo->query($sql);
 
@@ -343,14 +354,6 @@
                 } catch (PDOException $e) {
                     echo "<p>Database error: " . htmlspecialchars($e->getMessage()) . "</p>";
                 }
-
-
-
-
-
-
-
-
                 ?>
         </div>
         <div>

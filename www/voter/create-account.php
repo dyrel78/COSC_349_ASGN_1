@@ -53,8 +53,9 @@ $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
                 // Insert new user into the database
                 $stmt = $pdo->prepare("INSERT INTO Users (username, user_password, email, age, gender) VALUES (:username, :password, :email, :age, :gender)");
                 $stmt->bindParam(':username', $username);
-                // $stmt->bindParam(':password', $hashed_password);
-                $stmt->bindParam(':password', $password);
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+                $stmt->bindParam(':password', $hashed_password);
+                // $stmt->bindParam(':password', $password);
                 $stmt->bindParam(':email', $email);
                 $stmt->bindParam(':age', $age, PDO::PARAM_INT);
                 $stmt->bindParam(':gender', $gender);

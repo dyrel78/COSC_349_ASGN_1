@@ -34,32 +34,23 @@ try {
         $likedDrinkId->bindParam(":id", $id, PDO::PARAM_INT);
         $likedDrinkId->execute();
         // $likedDrink = $likedDrinkId->fetch(PDO::FETCH_ASSOC);
-        
+
 
         // Delete the drink from the Drinks table
         $deleteDrink = $pdo->prepare('DELETE FROM Drinks WHERE id = :id');
         $deleteDrink->bindParam(':id', $id, PDO::PARAM_INT);
-        // $deleteDrink->execute();
-
-        if( $deleteDrink->execute() ){
+        if ($deleteDrink->execute()) {
             // Feedback for the user 
             echo "<p> Drink and associated likes deleted successfully. </p>";
- 
-
             $success_message = 'Drink deleted successfully.';
-        }else{
+        } else {
             echo "Error deleting drink.";
             echo "<p> Drink not deleted. </p>";
         }
-
     }
-
 } catch (PDOException $e) {
     // Handle any errors during the database operations
     echo "Error: " . $e->getMessage();
-
 }
-
 header("Location: admin-page.php");
 exit;
-?>

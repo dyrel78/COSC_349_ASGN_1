@@ -82,6 +82,7 @@ $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
         <div class="login-container">
             <h2>Upload Drink</h2>
             <form action="upload-page.php" method="post">
+                
                 <label for="name_of_drink">Drink Name:</label>
                 <input type="text" id="name_of_drink" name="name_of_drink" required>
                 
@@ -90,9 +91,6 @@ $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
 
                 <label for = "price">Price:</label>
                 <input type = "text" id = "price" name = "price" required>
-
-                <!-- <label for = "image"> Image:</label>
-                <input type = "text" id = "image" name = "image" required> -->
                 
                 <input type="submit" value="Upload Drink">
             </form>
