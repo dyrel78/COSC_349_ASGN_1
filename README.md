@@ -64,7 +64,7 @@ git clone https://github.com/dyrel78/COSC_349_ASGN_1.git
 cd your/path/to/COSC_349_ASGN_1
 ```
 
-3. Run the vagrant command.
+3. Run the following vagrant commands to start the VM .
 ```
 vagrant up
 ```
@@ -104,23 +104,20 @@ vagrant ssh adminserver
 vagrant ssh dbserver
 ```
 
-### <ins> Restarting the application after initial build</ins>
-  
-`vagrant up` &rarr; This will restart the application and the 3 VM's
 
 </br>
 
-### <ins>Finding and killing address in use</ins>
 
-* `lsof -i tcp:8080`
 
-Once you have the PID (Process ID) use:
+### <ins> Removing the Virtual Machines/Containers </ins>
 
-* `kill -9 <PID>`
-
+```
+vagrant destroy
+```
 </br>
 
-### <ins>Changing Source - Keeps data persistent</ins>
+
+### <ins>Changing admin/voter provisions scripts  - Keeps data persistent</ins>
 
 Use these commands to change the source code in the /admin and /voter folders. This will not delete any updates made to the database.
   ```
@@ -130,7 +127,8 @@ vagrant provision adminserver --provision-with restart
 </br>
 
 
-### <ins>Changing admin/ changing provision script - Saves DB</ins>
+### <ins> Command to see effects of changing the Vagrantfile </ins>
+
 
 ```
 vagrant reload
@@ -157,13 +155,7 @@ OR  -->
 
 * `sudo sh restart-db-server.sh` -->
 
-</br>
-
-### <ins> Removing the Virtual Machines/Containers </ins>
-
-```
-vagrant destroy
-```
+<br>
 
 ### <ins>Accesing the database via the command line</ins>
 
@@ -175,6 +167,15 @@ mysql -u root
 
 
 
+</br>
+
+### <ins>Finding and killing address in use</ins>
+
+* `lsof -i tcp:8080`
+
+Once you have the PID (Process ID) use:
+
+* `kill -9 <PID>`
 
 
 
@@ -200,14 +201,14 @@ The setup-database.sql file contains the schema and dummy data for the database.
 
 | Admin Flag | Username    | Email              | Password     | Liked Drink ID | Age | Gender |
 |------------|-------------|--------------------|--------------|----------------|-----|--------|
-| false      | john_doe    | john@example.com   | password123  | 1              | 28  | male   |
-| false      | jane_doe    | jane@example.com   | password123  | 2              | 25  | female |
-| false      | sam_smith   | sam@example.com    | password123  | 3              | 30  | male   |
-| true       | admin_user  | admin@example.com  | adminpassword | NULL           | 35  | female |
-| false      | alex_jones  | alex@example.com   | password123  | 4              | 40  | male   |
-| false      | chris_lee   | chris@example.com  | password123  | 5              | 22  | female |
-| false      | sarah_brown | sarah@example.com  | password123  | 1              | 18  | female |
-| false      | mike_brown  | mike@example.com   | password123  | 1              | 20  | female |
+| false      | john_doe    | john@example.com   | password  | 1              | 28  | male   |
+| false      | jane_doe    | jane@example.com   | password  | 2              | 25  | female |
+| false      | sam_smith   | sam@example.com    | password  | 3              | 30  | male   |
+| true       | admin_user  | admin@example.com  | password | NULL           | 35  | female |
+| false      | alex_jones  | alex@example.com   | password  | 4              | 40  | male   |
+| false      | chris_lee   | chris@example.com  | password  | 5              | 22  | female |
+| false      | sarah_brown | sarah@example.com  | password  | 1              | 18  | female |
+| false      | mike_brown  | mike@example.com   | password  | 1              | 20  | female |
 | false      | joe_brown   | joe@examples.com   | password     | 6              | 55  | other  |
 | false      | peter_parker| peter@examples.com | password     | 5              | 45  | other  |
 
