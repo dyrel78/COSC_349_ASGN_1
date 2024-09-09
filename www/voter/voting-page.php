@@ -112,14 +112,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                         echo "<h3>" . htmlspecialchars($row["name_of_drink"]) . "</h3>";
                         echo "<p>" . htmlspecialchars($row["descripton"]) . "</p>";
                         echo "<p>Price: $" . htmlspecialchars($row["price"]) . "</p>";
-                        // rating
-                        // echo "<select name='rating'>" . htmlspecialchars($row["rating"])
-                        //     . "<option value='1'>1</option>"
-                        //     . "<option value='2'>2</option>"
-                        //     . "<option value='3'>3</option>"
-                        //     . "<option value='4'>4</option>"
-                        //     . "<option value='5'>5</option>"
-                        //     . "</select>"; 
+             
 
                         echo "<p>You have already voted for this drink</p>";
 
@@ -129,16 +122,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                     echo "<h3>" . htmlspecialchars($row["name_of_drink"]) . "</h3>";
                     echo "<p>" . htmlspecialchars($row["descripton"]) . "</p>";
                     echo "<p>Price: $" . htmlspecialchars($row["price"]) . "</p>";
-                    // echo "<p>Rating: " . htmlspecialchars($row["rating"]) . "</p>";
-                    // echo "<p>Likes: " . htmlspecialchars($row["likes"]) . "</p>";
-                    // echo "<button>Vote</button>";
-                    // echo "<select name='rating'>" . htmlspecialchars($row["rating"])
-                    // . "<option value='1'>1</option>"
-                    // . "<option value='2'>2</option>"
-                    // . "<option value='3'>3</option>"
-                    // . "<option value='4'>4</option>"
-                    // . "<option value='5'>5</option>"
-                    // . "</select>"; 
+              
                     echo "<form action='choose-voted-drink.php' method='post'>";
                     echo "<input type='hidden' name='drink_id' value='" . htmlspecialchars($row["id"]) . "'>";
                     echo "<input class='submit-button' type='submit' value='Vote'>";

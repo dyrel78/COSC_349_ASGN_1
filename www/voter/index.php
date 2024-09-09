@@ -160,16 +160,7 @@ session_start();
                 <!-- <div class="drink-of-the-week"> -->
                 <div class="card-item">
                     <?php
-                    // $q = $pdo->query(
-                    // "SELECT * FROM  DrinkOfTheWeek as dotw
-                    // INNER JOIN Drinks  as d on dotw.drink_id = d.id
-                    // ORDER BY dotw.id DESC LIMIT 1
-                    // ");
-                    // $row = $q->fetch();
-                    // echo "<h3>" . htmlspecialchars($row["name_of_drink"]) . "</h3>";
-                    // echo "<p>" . htmlspecialchars($row["descripton"]) . "</p>";
-                    // echo "<p> Price : $" . htmlspecialchars($row["price"]) . "</p>";
-
+              
                    try{
                     $dotw = $pdo->query(
                         "SELECT * FROM Drinks
@@ -189,7 +180,6 @@ session_start();
 
             </div>
                
-         <!-- <img src="assets/drinks.webp" alt="drink" style="width: 60%; height: 60%;  "> -->
        
             
         </div>

@@ -1,16 +1,13 @@
 
 
-<!-- This page is for when a user has chosen their vote -->
 <?php
 session_start(); // Start the session
 
-// Check if the user is logged in
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: login.php');
     exit;
 }
 
-// Database connection parameters
 $db_host = '192.168.2.12';
 $db_name = 'drinksDB';
 $db_user = 'webuser';
@@ -36,14 +33,12 @@ try {
 
         //Decrementing Drink votes is done in sql database
 
-        // update the user's liked drink
         $updateLikedDrinkQuery = "UPDATE Users SET liked_drink_id = ? WHERE id = ?";
         $updateLikedDrinkStmt = $pdo->prepare($updateLikedDrinkQuery);
         $updateLikedDrinkStmt->execute([$drinkId, $userId]);
         $updateLikedDrinkStmt->closeCursor();
         
 
-         //insert into the userlikes table
         $insertLikeQuery = "INSERT INTO UserLikes (user_id, drink_id) VALUES (?, ?)";
         $insertLikeStmt = $pdo->prepare($insertLikeQuery);
         $insertLikeStmt->execute([$userId, $drinkId]);

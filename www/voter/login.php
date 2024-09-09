@@ -23,33 +23,14 @@ try {
         $username = trim($_POST['username']);
         $password = trim($_POST['user_password']);
 
-
-
-        // Prepare a SQL statement to prevent SQL injection
-        // $stmt = $pdo->prepare("SELECT * FROM Users WHERE username = :username LIMIT 1");
-        // $stmt->bindParam(':username', $username);
-        // $stmt->execute();
-        // $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // $stmt = $pdo->prepare("SELECT * FROM Users WHERE username = :username and user_password = :this_password");
-        // $stmt->bindParam(':username', $username);
-        // $stmt->bindParam(':this_password', $password);
-        // $stmt->execute();
-        // $existing_user = $stmt->fetch(PDO::FETCH_ASSOC);
-
          $stmt = $pdo->prepare("SELECT * FROM Users WHERE username = :username");
             $stmt->bindParam(':username', $username);
             $stmt->execute();
             $existing_user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // if(password_verify($password, $existing_user['password'])) {
-        // } else {
-        //     $error_message = 'Invalid username or password';
-        // }
-
+    
         // Verify the password
         if (isset($existing_user)  && password_verify($password, $existing_user['user_password']  )) {
-            // Set session variable to track login status
             $_SESSION['logged_in'] = true;
             $_SESSION['username'] = $username;
             $_SESSION['user_id'] = $existing_user['id'];
@@ -59,7 +40,6 @@ try {
         } else {
             // Display an error message if login failed
             $error_message = 'Invalid username or password';
-            // echo "<p class='error-message'> Invalid username or password </p>";
         }
     } else {
         // echo "<p> Please enter your username and password to login. </p>";
@@ -131,13 +111,6 @@ try {
 
         }
         ?>
-        <!-- <div class="navbar">
-            <div class="navbar-logo">Drinks App</div>
-            <ul class="navbar-links">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="login.php">Login</a></li>
-            </ul>
-        </div> -->
 
         <div class="login-container">
             <h2>Login</h2>

@@ -43,12 +43,9 @@ $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
             $existing_user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($existing_user) {
-                // If username is taken, show an error message
                 $message = 'Username already exists. Please choose a different one.';
                 $error = true;
             } else {
-                // Hash the password before storing
-                // $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
                 // Insert new user into the database
                 $stmt = $pdo->prepare("INSERT INTO Users (username, user_password, email, age, gender) VALUES (:username, :password, :email, :age, :gender)");
@@ -61,7 +58,6 @@ $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
                 $stmt->bindParam(':gender', $gender);
 
                 if ($stmt->execute()) {
-                    // Display success message
                     $message = 'Account created successfully! You can now login.';
                     // $message = 'Account created successfully! You can now <a href="login.php">login</a>.';
 
