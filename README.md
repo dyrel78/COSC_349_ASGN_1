@@ -159,6 +159,11 @@ OR  -->
 
 </br>
 
+### <ins> Removing the Virtual Machines/Containers </ins>
+
+```
+vagrant destroy
+```
 
 ### <ins>Accesing the database via the command line</ins>
 
